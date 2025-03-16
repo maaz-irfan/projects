@@ -1,6 +1,5 @@
 import streamlit as st
 import random
-from textblob import TextBlob
 
 # Growth Mindset Questions
 challenges = [
@@ -22,28 +21,10 @@ st.write(selected_challenge["question"])
 # User input text area
 user_response = st.text_area("Your Response", "")
 
-# Function to check if the response is meaningful
-def is_meaningful_text(text):
-    words = text.split()
-    valid_words = [word for word in words if TextBlob(word).correct() == word]  # Check if each word is valid
-    return len(valid_words) > 0  # If at least one word is valid, return True
-
-# Function to check and correct spelling/grammar
-def check_spelling(text):
-    return str(TextBlob(text).correct())  # AI-based correction
-
 # Submit Button
 if st.button("Submit Response"):
     if user_response.strip():
-        if is_meaningful_text(user_response):  # Check if text contains valid words
-            corrected_response = check_spelling(user_response)
-            
-            if corrected_response != user_response:
-                st.warning(f"🔍 Your response contains some mistakes. Do you want to correct it?\n\n**Corrected Version:** {corrected_response}")
-            else:
-                st.success("✅ Great job! Your response looks good. Keep going!")
-        else:
-            st.error("❌ Your response doesn't seem to contain meaningful words. Please enter a valid answer.")
+        st.success("✅ Great job! Your response has been submitted.")
     else:
         st.warning("⚠️ Please enter a response before submitting.")
 
