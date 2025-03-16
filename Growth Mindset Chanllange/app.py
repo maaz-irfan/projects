@@ -2,47 +2,42 @@ import streamlit as st
 import random
 from textblob import TextBlob
 
-# Growth Mindset Questions
+# List of challenges
 challenges = [
-    {"question": "What is something new you learned today?", "response": ""},
-    {"question": "How did you handle a difficult situation recently?", "response": ""},
-    {"question": "What can you do differently next time you face a challenge?", "response": ""},
-    {"question": "Write about a mistake you made and what you learned from it.", "response": ""},
-    {"question": "What is one skill you want to improve, and how will you work on it?", "response": ""}
+    "What can you do differently next time you face a challenge?",
+    "Write about a mistake you made and what you learned from it.",
+    "What is one skill you want to improve, and how will you work on it?"
 ]
 
-# Streamlit UI
-st.title("🚀 Growth Mindset Challenge")
-st.write("Every challenge is an opportunity to grow. Answer these questions to reflect and build a growth mindset!")
+# Title and description
+st.title("🚀 Growth Mindset Challenge") 
+st.write("Every challenge is an opportunity to grow. Reflect and build a growth mindset! 💡")
 
-# Select a random challenge
+# Randomly selecting a challenge
 selected_challenge = random.choice(challenges)
 
 st.subheader("💡 Challenge Question:")
-st.write(selected_challenge["question"])
+st.write(f"**{selected_challenge}**")
 
 # User input text area
-user_response = st.text_area("Your Response", "")
+user_response = st.text_area("✍️ Your Response", "")
 
-# Function to check and correct spelling/grammar
-def check_spelling(text):
-    corrected_text = str(TextBlob(text).correct())  # AI-based correction
-    return corrected_text
+# Function to correct spelling
+def correct_text(text):
+    return str(TextBlob(text).correct())
 
 # Submit Button
-if st.button("Submit Response"):
-    if user_response.strip():
-        corrected_response = check_spelling(user_response)
+if st.button("✅ Submit Response"):
+    if user_response.strip():  # Check if input is not empty
+        corrected_response = correct_text(user_response)
         
         if corrected_response != user_response:
-            st.warning(f"🔍 Your response contains some mistakes. Do you want to correct it?\n\n**Corrected Version:** {corrected_response}")
+            st.warning("🔍 Your response contains some spelling mistakes.")
+            st.write(f"**Suggested Correction:**\n\n➡️ {corrected_response}")
         else:
-            st.success("✅ Great job! Your response looks good. Keep going!")
+            st.success("✅ Your response looks great! Keep it up! 🚀")
     else:
-        st.warning("⚠️ Please enter a response before submitting.")
+        st.error("⚠️ Please write something before submitting.")
 
 # Motivational Message
-st.write("🌱 Remember: Challenges help you grow! Keep learning and improving. 🚀")
-
-# How to run the app:
-# In the terminal, type: `streamlit run app.py`
+st.write("🌱 **Remember:** Every challenge helps you grow! Keep learning and improving. 🚀")
