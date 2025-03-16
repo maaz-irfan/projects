@@ -4,8 +4,6 @@ from textblob import TextBlob
 
 # Growth Mindset Questions
 challenges = [
-    {"question": "What is something new you learned today?", "response": ""},
-    {"question": "How did you handle a difficult situation recently?", "response": ""},
     {"question": "What can you do differently next time you face a challenge?", "response": ""},
     {"question": "Write about a mistake you made and what you learned from it.", "response": ""},
     {"question": "What is one skill you want to improve, and how will you work on it?", "response": ""}
